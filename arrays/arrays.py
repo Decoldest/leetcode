@@ -1,4 +1,5 @@
 ## Array questions in Leetcode 150
+from collections import defaultdict
 from typing import List
 
 # Duplicate Integer
@@ -34,3 +35,23 @@ class Solution:
                 anagrams[letters] = [word]
 
         return anagrams.values()
+
+# Top K Elements in List
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        counts = defaultdict(int)
+        for num in nums:
+          counts[num] += 1;
+
+        frequency = [[] for i in range(len(nums) + 1)] 
+
+        for number, count in counts.items():
+          frequency[count].append(number)
+
+        result = []
+        
+        for value in range(len(frequency) - 1, 0, -1):
+          for fr in frequency[value]:
+              result.append(fr)
+              if(len(result) == k):
+                  return result
