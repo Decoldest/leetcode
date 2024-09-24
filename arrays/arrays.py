@@ -55,3 +55,24 @@ class Solution:
               result.append(fr)
               if(len(result) == k):
                   return result
+              
+# String Encode and Decode
+class Solution:
+    def encode(self, strs: List[str]) -> str:
+        result = ""
+        for word in strs:
+            result += str(len(word)) + "*" + word
+        return result
+
+    def decode(self, s: str) -> List[str]:
+        result = []
+        index = s.find("*")
+
+        while(index > -1):
+            length = int(s[:index])
+            result.append(s[index + 1 : index + 1 + length])
+            s = s[index + 1 + length:]
+            index = s.find("*")
+
+        return result
+
