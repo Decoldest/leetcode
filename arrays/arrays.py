@@ -21,3 +21,16 @@ class Solution:
             if difference in seen:
                 return [seen[difference], i]
             seen[n] = i
+
+# Anagram Groups
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        anagrams = {}
+        for word in strs:
+            letters = "".join(sorted(word))
+            if letters in anagrams:
+                anagrams[letters].append(word)
+            else:
+                anagrams[letters] = [word]
+
+        return anagrams.values()
