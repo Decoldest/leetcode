@@ -118,3 +118,23 @@ class Solution:
                 subBox[(i // 3, j // 3)].add(digit)
 
         return True
+
+# Longest Consecutive Sequence
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        values = set(nums)
+        result = 0
+
+        for num in values:
+            if num - 1 not in values:
+                length = 1
+                j = 1
+                while num + j in values:
+                    length += 1
+                    j += 1
+
+                if length > result:
+                    result = length
+        
+        return result
+
