@@ -79,16 +79,42 @@ class Solution:
 # Product of array discluding self
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-      result = [1] * len(nums)
+        result = [1] * len(nums)
 
-      prefix = 1
-      for i in range(0, len(nums)):
-        result[i] = prefix
-        prefix *= nums[i]
+        prefix = 1
+        for i in range(0, len(nums)):
+            result[i] = prefix
+            prefix *= nums[i]
       
-      postfix = 1
-      for i in range(len(nums) - 1, -1, -1):
-        result[i] *= postfix
-        postfix *= nums[i]
+        postfix = 1
+        for i in range(len(nums) - 1, -1, -1):
+            result[i] *= postfix
+            postfix *= nums[i]
 
         return result
+
+# Valid Sudoku
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        col = [set() for i in range(9)]
+        subBox = defaultdict(set)
+
+        for i, row in enumerate(board):
+            rowNums = set()
+            for j, digit in enumerate(row):
+                if digit == ".":
+                    continue
+
+                if digit in rowNums:
+                    return False
+                rowNums.add(digit)
+
+                if digit in col[j]:
+                    return False
+                col[j].add(digit)
+
+                if digit in subBox[(i // 3, j // 3)]:
+                    return False
+                subBox[(i // 3, j // 3)].add(digit)
+
+        return True
