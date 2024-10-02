@@ -65,3 +65,24 @@ class Solution:
 
 
         return result
+
+# Max Water Container
+class Solution:
+    def maxArea(self, heights: List[int]) -> int:
+        result = 0
+        left, right = 0, len(heights) - 1
+
+        while right > left:
+            leftHeight, rightHeight = heights[left], heights[right]
+            area = (right - left) * min(leftHeight, rightHeight)
+
+            result = max(area, result) 
+
+            if leftHeight >= rightHeight:
+                right -= 1
+            else: 
+                left += 1
+
+        return result
+
+        
