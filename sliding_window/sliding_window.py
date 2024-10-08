@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import defaultdict, Counter
 from typing import List
 
 # Buy and Sell Stock
@@ -49,3 +49,23 @@ class Solution:
             result = max(result, i - left + 1)
 
         return result
+    
+# Permutation String
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+      lengthSmaller, lengthLarger = len(s1), len(s2)
+
+      if lengthLarger < lengthSmaller:
+        return False
+
+      frequencies, used = Counter(s1), Counter(s2[:lengthSmaller])
+
+      for i in range(lengthSmaller, lengthLarger):
+        if used == frequencies:
+          return True
+
+        used[s2[i]] += 1
+
+        used[s2[i - lengthSmaller]] -= 1
+
+      return used == frequencies
