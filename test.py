@@ -19,7 +19,26 @@ class Solution:
 
       return used == frequencies
     
-sol = Solution()
-s1 = "adc"
-s2 = "dcda"
-print(sol.checkInclusion(s1, s2))
+class Stack:
+  def isValid(self, s: str) -> bool:
+
+    stack = []
+    characterMap = { 
+        ")" : "(",
+        "]" : "[",
+        "}" : "{",
+    }
+
+    for char in s:
+      if not char in characterMap:
+        stack.append(char)
+      else: 
+        if not stack or characterMap[char] != stack.pop():
+          return False        
+
+    return not stack
+  
+stackSolution = Stack()
+s="[(])"
+print(stackSolution.isValid(s))
+
