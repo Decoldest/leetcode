@@ -1,4 +1,5 @@
 from collections import Counter
+from typing import List
 
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
@@ -37,8 +38,38 @@ class Stack:
           return False        
 
     return not stack
-  
-stackSolution = Stack()
-s="[(])"
-print(stackSolution.isValid(s))
 
+
+class Operator:
+  def operate(self, first, second, operator) -> int:
+    result = 0
+    if(operator == "+"):
+      result = first + second
+    elif(operator == "-"):
+      result = first - second
+    elif(operator == "*"):
+      result = first * second
+    else:
+      result = int(float(first / second))
+    return result
+
+  def evalRPN(self, tokens: List[str]) -> int:
+    stack = []
+    for string in tokens:
+      if not string  in ["+", "-", "*", "/"]:
+        stack.append(int(string))
+
+      else:
+        second = stack.pop()
+        first = stack.pop()
+        
+        stack.append(self.operate(first, second, string))
+    return stack.pop()
+
+
+
+sol = Operator()
+tokens=["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
+print(sol.evalRPN(tokens))
+
+        
