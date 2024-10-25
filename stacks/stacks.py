@@ -72,3 +72,27 @@ class Solution:
     return stack.pop()
 
       
+# Generate Parenthesis
+class Solution:
+  def generateParenthesis(self, n: int) -> List[str]:
+      
+    stack = []
+    result = []
+
+    def recursive(openBracketsN, closedBracketsN):
+      if openBracketsN == closedBracketsN == n:
+        result.append("".join(stack))
+        return
+      
+      if openBracketsN < n:
+        stack.append("(")
+        recursive(openBracketsN + 1, closedBracketsN)
+        stack.pop()
+
+      if closedBracketsN < openBracketsN:
+        stack.append(")")
+        recursive(openBracketsN, closedBracketsN + 1)
+        stack.pop()
+      
+    recursive(0,0)
+    return result 
