@@ -96,3 +96,16 @@ class Solution:
       
     recursive(0,0)
     return result 
+
+# Daily Temperatures
+class Solution:
+  def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+    result = [0] * len(temperatures)
+    stack = []
+
+    for (i, temperature) in enumerate(temperatures):
+      while stack and temperature > stack[-1][1]:
+        poppedIndex, poppedTemp = stack.pop()
+        result[poppedIndex] = (i - poppedIndex)
+      stack.append([i, temperature])
+    return result
