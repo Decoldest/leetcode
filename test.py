@@ -68,8 +68,42 @@ class Operator:
 
 
 
-sol = Operator()
-tokens=["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
-print(sol.evalRPN(tokens))
+class Matrix:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        topRow, bottomRow = 0, len(matrix) - 1
 
+        while(topRow <= bottomRow):
+            middleRow = (topRow + bottomRow) // 2
+            
+            if(matrix[middleRow][0] > target):
+                bottomRow = middleRow - 1
+                print("too big")
+            elif(matrix[middleRow][-1] < target):
+                topRow = middleRow + 1
+                print("too small")
+            else:
+                print("break")
+                break
         
+        
+        currentRow = matrix[middleRow]
+        left, right = 0, len(currentRow) - 1
+
+        print(currentRow)
+
+        while(left <= right):
+            middle = (left + right) // 2
+            currentNumber = currentRow[middle]
+            # print("currentNUm: ", currentNumber)
+
+            if(currentNumber > target):
+                right = middle - 1
+            elif(currentNumber < target):
+                left = middle + 1
+            else:
+                return True
+            
+        return False 
+        
+mat = Matrix()
+mat.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 13)
